@@ -42,7 +42,7 @@ class AuthController extends Controller
             return $this->respondWithToken($token);
 
         } catch (\Exception $e) {
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => $e->getMessage()], 401);
         }
     }
 

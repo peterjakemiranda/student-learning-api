@@ -54,7 +54,7 @@ class SectionController extends Controller
         $rules = [
             'title' => 'nullable|string',
             'content' => 'required|string',
-            'chapter_id' => 'required|integer|chapters,id',
+            'chapter_id' => 'required|integer|exists:chapters,id',
         ];
         $this->validate($request, $rules);
 

@@ -62,7 +62,7 @@ $app->configure('app');
 $app->configure('auth');
 $app->configure('mail');
 $app->configure('services');
-$app->configure('cors');
+// $app->configure('cors');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -75,7 +75,8 @@ $app->configure('cors');
 */
 
 $app->middleware([
-    Fruitcake\Cors\HandleCors::class,
+    // Fruitcake\Cors\HandleCors::class,
+    App\Http\Middleware\CorsMiddleware::class
 ]);
 
 $app->routeMiddleware([

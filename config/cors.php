@@ -20,17 +20,17 @@ return [
      * You can enable CORS for 1 or multiple paths.
      * Example: ['api/*']
      */
-    'paths' => ['*'],
+    'paths' => ['*', 'api/*'],
 
     /*
     * Matches the request method. `['*']` allows all methods.
     */
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
 
     /*
      * Matches the request origin. `['*']` allows all origins. Wildcards can be used, eg `*.mydomain.com`
      */
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*.handbook.digital', '*'],
 
     /*
      * Patterns that can be used with `preg_match` to match the origin.
@@ -40,7 +40,8 @@ return [
     /*
      * Sets the Access-Control-Allow-Headers response header. `['*']` allows all headers.
      */
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['Access-Control-Request-Method',
+'Access-Control-Request-Headers', '*'],
 
     /*
      * Sets the Access-Control-Expose-Headers response header with these headers.
@@ -55,5 +56,5 @@ return [
     /*
      * Sets the Access-Control-Allow-Credentials header.
      */
-    'supports_credentials' => true,
+    'supports_credentials' => false,
 ];

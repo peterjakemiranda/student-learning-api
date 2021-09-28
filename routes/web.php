@@ -21,6 +21,7 @@ $router->get('/', function () use ($router) {
 
 Route::group([
     'prefix' => 'api',
+    'middleware' => 'cors'
 ], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@register');

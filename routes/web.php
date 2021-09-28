@@ -23,10 +23,10 @@ Route::group([
     'prefix' => 'api',
 ], function ($router) {
     Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@register');
     Route::post('password/reset_request', 'RequestPasswordController@sendResetLinkEmail');
     Route::get('password/reset', ['as' => 'password.reset', 'uses' => 'ResetPasswordController@reset']);
     Route::get('refresh', 'AuthController@refresh');
-    Route::post('register', 'AuthController@register');
 
     Route::group([
         'middleware' => 'auth',

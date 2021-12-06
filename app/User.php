@@ -24,16 +24,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_USER = 'user';
+    const ROLE_STUDENT = 'student';
+    const ROLE_TEACHER = 'teacher';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'first_name', 'last_name', 'email',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -43,6 +42,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
         'remember_token'
+    ];
+
+    protected $appends = [
+        'fullname'
     ];
 
     /**
@@ -65,9 +68,31 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [];
     }
 
-    public function bookmarks() : HasMany
+    public function getFullnameAttribute()
     {
-        return $this->hasMany(Bookmark::class, 'user_id');
+        return $this->first_name.' '.$this->last_name;
     }
-    
+
+    /**
+     * The courses that belong to the user.
+     */
+    public function courses()
+    {
+        return $this->role === static::ROLE_TEACHER ? $this->hasMany(Course::class, 'user_id') : $this->belongsToMany(Course::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(ActivityAnswer::class, 'student_id');
+    }
+
+    public function quiz_answers()
+    {
+        return $this->hasMany(QuizAnswer::class, 'student_id');
+    }
+
+    public function quiz_score()
+    {
+        return $this->hasOne(QuizScore::class, 'student_id');
+    }
 }

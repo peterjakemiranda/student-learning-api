@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SDSSU Handbook App</title>
+        <title>SDSSU Student Learning App</title>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     </head>
     <body class="font-sans leading-normal tracking-normal text-gray-900 bg-gray-100">
@@ -13,7 +13,7 @@
 			<div class="container w-full md:max-w-3xl mx-auto pt-20">
 			<div class="w-full px-4 md:px-6 text-xl text-gray-900 leading-normal" style="font-family:Georgia,serif;">
 				<div>
-							<h1 class="font-bold font-sans break-normal text-black pt-6 pb-2 text-3xl md:text-3xl"><span style="color:#0470d9">SDSSU</span> Handbook App</h1>
+							<h1 class="font-bold font-sans break-normal text-black pt-6 pb-2 text-3xl md:text-3xl"><span style="color:#0470d9">SDSSU</span> Student Learning App</h1>
 							<h3 class="font-bold break-normal text-gray-900 pt-6 pb-2 text-xl md:text-2xl">Password Reset</h3>
 				</div>
 				@if($success)

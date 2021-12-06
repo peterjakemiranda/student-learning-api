@@ -44,4 +44,13 @@ class AccountController extends Controller
         }
         return response()->json(['message' => 'Account updated'], 200);
     }
+
+    public function storeToken(Request $request)
+    {
+        $this->validate($request, [
+            'token' => 'required|string',
+        ]);
+        auth()->user()->update(['device_key'=> $request->token]);
+        return response()->json(['Token successfully stored.']);
+    }
 }

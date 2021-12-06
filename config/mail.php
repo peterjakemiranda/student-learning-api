@@ -49,7 +49,7 @@ return [
 */
 'from' => [
   'address' => env('MAIL_FROM_ADDRESS', 'admin@handbook.io'),
-  'name' => env('MAIL_FROM_NAME', 'SDSSU Handbook App'),
+  'name' => env('MAIL_FROM_NAME', 'SDSSU Student Learning App'),
 ],
 /*
 | — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —

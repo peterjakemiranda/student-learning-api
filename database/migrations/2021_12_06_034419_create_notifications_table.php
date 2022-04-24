@@ -20,7 +20,7 @@ class CreateNotificationsTable extends Migration
             $table->string('title');
             $table->string('body');
             $table->string('type');
-            $table->json('data')->nullable();
+            $table->text('data')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

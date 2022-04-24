@@ -73,7 +73,7 @@ trait PushNotificaitonTrait
             ->get();
     }
 
-    public function sendPushNotification($users = null, $title = '', $body = '', $type = '', $data)
+    public function sendPushNotification($users = null, $title = '', $body = '', $type = '', $data = [])
     {
       try {
         $userDevices = [];
@@ -84,9 +84,12 @@ trait PushNotificaitonTrait
         }
         $this->saveNotificationToDb($userIds, $title, $body, $type, $data);
 
+        $data['type'] = $type;
+
         $notification = [
           'title' => $title,
           'body' => $body,
+          'click_action' => 'FCM_PLUGIN_ACTIVITY',
         ];
         $notification = array_filter($notification, function ($value) {
             return null !== $value;

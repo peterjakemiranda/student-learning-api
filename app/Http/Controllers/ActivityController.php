@@ -57,12 +57,10 @@ class ActivityController extends Controller
         $activity->draft = $request->input('draft', 0);
 
         if ($request->hasFile('file')) {
-            $uploadDir = 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
-            Storage::makeDirectory($uploadDir);
             $file = $request->file('file');
             $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
-            $file->storeAs($uploadDir, $filename);
-            $activity->file = 'storage' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . $filename;
+            $t = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            $activity->file = Storage::disk('s3')->url($filename);
         }
         if ($activity->save() && !$request->input('draft')) {
             $this->sendActivityAddedNotification($activity);
@@ -105,12 +103,10 @@ class ActivityController extends Controller
         $activity->course_id = $request->input('course_id');
         $activity->draft = $request->input('draft', 0);
         if ($request->hasFile('file')) {
-            $uploadDir = 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
-            Storage::makeDirectory($uploadDir);
             $file = $request->file('file');
             $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
-            $file->storeAs($uploadDir, $filename);
-            $activity->file = 'storage' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . $filename;
+            $t = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            $activity->file = Storage::disk('s3')->url($filename);
         }
         if ($activity->save()) {
            if( $request->input('draft') == 0 && $request->input('draft') != $isDraftOriginally) {

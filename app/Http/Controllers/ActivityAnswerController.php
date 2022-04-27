@@ -28,12 +28,10 @@ class ActivityAnswerController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            $uploadDir = 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'answers' . DIRECTORY_SEPARATOR;
-            Storage::makeDirectory($uploadDir);
             $file = $request->file('file');
             $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs($uploadDir, $filename);
-            $answer->file = 'storage' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'answers' . DIRECTORY_SEPARATOR . $filename;
+            $t = Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+            $answer->file = Storage::disk('s3')->url($filename);
         }
         $answer->save();
 

@@ -24,6 +24,8 @@ class QuizController extends Controller
                     ->orWhereNotNull('started_date');
             })->with(['score' => function ($query) {
                 $query->where('student_id', auth()->id());
+            }])->with(['answers' => function ($query) {
+                $query->where('student_id', auth()->id());
             }]);
         }
         $quizzes = $query->get();
@@ -72,6 +74,19 @@ class QuizController extends Controller
                 $this->sendQuizStoppedNotification($quiz);
             }
         }
+
+        return response()->json($quiz->refresh());
+    }
+
+    public function archive(Request $request, $id)
+    {
+        $rules = [
+            'archive' => 'required|integer',
+        ];
+        $this->validate($request, $rules);
+        $quiz = Quiz::find($id);
+        $quiz->archive = $request->input('archive') ? 1 : 0;
+        $quiz->save();
 
         return response()->json($quiz->refresh());
     }

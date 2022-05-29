@@ -28,7 +28,7 @@ class AccountController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|max:100',
-            'password' => 'nullable|confirmed|string|min:6',
+            'password' => 'nullable|confirmed|string|min:6|regex:/[a-zA-Z0-9\s]+/',
         ]);
         try {
             $user = auth()->user();

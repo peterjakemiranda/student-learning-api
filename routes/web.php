@@ -53,6 +53,7 @@ Route::group([
         Route::post('quizzes/{id}', 'QuizController@update');
         Route::delete('quizzes/{id}', 'QuizController@destroy');
         Route::put('quizzes/{id}/toggle', 'QuizController@toggle');
+        Route::put('quizzes/{id}/archive', 'QuizController@archive');
 
         Route::post('quizzes/{id}/answer', 'QuizAnswerController@store');
         Route::post('quizzes/{id}/score', 'QuizAnswerController@score');
